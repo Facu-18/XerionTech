@@ -34,10 +34,16 @@
   /* Darker than bg for contrast items */
   --color-black: #ffffff;
   --color-form-bg: rgba(255, 255, 255, 0.03);
+  --color-success: #4ade80;
+  /* Brighter green for dark mode */
+  --color-error: #f75555;
+  /* Brighter red for dark mode */
 }
 
 :root {
   --color-form-bg: #fcfcfc;
+  --color-success: #28a745;
+  --color-error: #dc3545;
 }
 
 * {

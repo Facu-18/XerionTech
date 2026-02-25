@@ -8,7 +8,7 @@ build/
 .netlify
 
 # Static assets from user
-public/icons/itps_one_black.svg
+# (Removed incorrect ignore for itps_one_black.svg)
 
 # OS generated files
 .DS_Store
