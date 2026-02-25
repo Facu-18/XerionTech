@@ -1,0 +1,57 @@
+---
+const services = [
+  {
+    icon: "💻",
+    title: "Software a Medida",
+    description:
+      "Aplicaciones robustas y escalables adaptadas a tu lógica de negocio utilizando las tecnologías más avanzadas.",
+  },
+  {
+    icon: "🌐",
+    title: "Webs y Landing Pages",
+    description:
+      "Experiencias web de alta conversión y ultra rápidas optimizadas para rendimiento y SEO.",
+  },
+  {
+    icon: "🤖",
+    title: "Automatización e IA",
+    description:
+      "Optimiza tus flujos de trabajo con agentes inteligentes y procesos automáticos personalizados.",
+  },
+  {
+    icon: "🛡️",
+    title: "Consultoría Técnica",
+    description:
+      "Asesoramiento experto en infraestructura, arquitectura y transformación tecnológica.",
+  },
+];
+---
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nuestra Experiencia</span>
+      <h2 class="section-title">Soluciones con impacto.</h2>
+      <p class="section-subtitle">
+        Cerramos la brecha entre la tecnología compleja y los resultados de
+        negocio.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <div class="service-card">
+            <div class="service-icon">{service.icon}</div>
+            <h3 class="service-title">{service.title}</h3>
+            <p class="service-description">{service.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @import "../styles/Services.css";
+</style>

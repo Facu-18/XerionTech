@@ -1,0 +1,75 @@
+---
+const today = new Date();
+---
+
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-brand">
+      <div class="logo">
+        <img
+          src="/icons/icono_empresa.svg"
+          alt="XerionTech Icon"
+          class="logo-icon"
+        />
+        <span class="logo-text">XerionTech</span>
+      </div>
+      <p class="footer-tagline">
+        Excelencia en software, IA y crecimiento digital.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-links-column">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#services">Servicios</a></li>
+          <li><a href="#stack">Tecnologías</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#founders">Fundadores</a></li>
+          <li><a href="#careers">Carreras</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-column">
+        <h4>Conecta</h4>
+        <ul>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/xerion-tech-7512143b3/"
+              target="_blank"
+              rel="noopener noreferrer">LinkedIn</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/xeriontech"
+              target="_blank"
+              rel="noopener noreferrer">Instagram</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/@xerionTecnologia"
+              target="_blank"
+              rel="noopener noreferrer">YouTube</a
+            >
+          </li>
+          <li><a href="mailto:xeriontech01@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>
+        &copy; {today.getFullYear()} XerionTech. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @import "../styles/Footer.css";
+</style>

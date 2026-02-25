@@ -1,0 +1,409 @@
+---
+const techs = [
+    { name: "React", icon: "Code2", color: "#61DAFB" },
+    { name: "Node.js", icon: "Cpu", color: "#339933" },
+    { name: "Database", icon: "Database", color: "#4479A1" },
+    { name: "Cloud", icon: "Cloud", color: "#FF9900" },
+    { name: "Mobile", icon: "Smartphone", color: "#3DDC84" },
+    { name: "API", icon: "Package", color: "#00D8FF" },
+    { name: "Security", icon: "Lock", color: "#E535AB" },
+    { name: "Web", icon: "Globe", color: "#8B5CF6" },
+    { name: "Server", icon: "Server", color: "#10B981" },
+    { name: "Performance", icon: "Zap", color: "#FFDD00" },
+];
+---
+
+<section id="stack" class="tech-stack-section">
+    <div class="container relative z-10">
+        <div class="section-header">
+            <span class="section-tag">Nuestro Universo Tecnológico</span>
+            <h2 class="section-title">Stack Moderno para Desafíos Reales.</h2>
+            <p class="section-subtitle">
+                Utilizamos las mejores tecnologías del mercado para construir
+                soluciones digitales resilientes y preparadas para el futuro.
+            </p>
+        </div>
+    </div>
+
+    <div class="tech-universe-container" id="tech-universe">
+        <div class="space-background" id="stars-container"></div>
+        <div class="nebula-minimal"></div>
+
+        <div class="tech-planets-wrapper">
+            <div class="tech-planets" id="tech-planets">
+                {
+                    techs.map((tech, index) => (
+                        <div
+                            class="tech-planet"
+                            data-name={tech.name}
+                            data-color={tech.color}
+                            data-index={index}
+                            style={`--tech-color: ${tech.color};`}
+                        >
+                            <div
+                                class="planet-glow"
+                                style={`background: ${tech.color};`}
+                            />
+                            <div class="planet-content">
+                                <div
+                                    class="planet-icon"
+                                    style={`color: ${tech.color};`}
+                                >
+                                    <i data-lucide={tech.icon} />
+                                </div>
+                                <div class="planet-name">{tech.name}</div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-gradient"></div>
+</section>
+
+<script>
+    import {
+        createIcons,
+        Code2,
+        Database,
+        Cloud,
+        Smartphone,
+        Layout,
+        Cpu,
+        GitBranch,
+        Package,
+        Zap,
+        Lock,
+        Globe,
+        Server,
+    } from "lucide";
+
+    let handleMouseMoveGlobal: ((e: MouseEvent) => void) | null = null;
+    let resizeObserver: ResizeObserver | null = null;
+
+    // Function to initialize everything
+    const initUniverse = () => {
+        // Initialize Lucide icons
+        createIcons({
+            icons: {
+                Code2,
+                Database,
+                Cloud,
+                Smartphone,
+                Layout,
+                Cpu,
+                GitBranch,
+                Package,
+                Zap,
+                Lock,
+                Globe,
+                Server,
+            },
+        });
+
+        const container = document.getElementById("tech-universe");
+        const planets = document.querySelectorAll(".tech-planet");
+        const starsContainer = document.getElementById("stars-container");
+
+        if (!container || !planets.length) return;
+
+        const isMobile = window.innerWidth < 768;
+
+        // Cleanup
+        if (handleMouseMoveGlobal) {
+            window.removeEventListener("mousemove", handleMouseMoveGlobal);
+        }
+        if (starsContainer) starsContainer.innerHTML = "";
+
+        // Generate stars
+        const isDark = document.documentElement.classList.contains("dark");
+        const starCount = window.innerWidth < 768 ? 30 : 70;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement("div");
+            star.className = "star";
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 1.5 + 0.5;
+            const opacity = Math.random() * (isDark ? 0.4 : 0.2) + 0.1;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.opacity = opacity.toString();
+            star.style.position = "absolute";
+            star.style.background = isDark
+                ? "rgba(255, 255, 255, 0.8)"
+                : "rgba(0, 86, 179, 0.6)"; // More visible in light mode
+            star.style.borderRadius = "50%";
+            starsContainer?.appendChild(star);
+        }
+
+        // Mouse move parallax
+        handleMouseMoveGlobal = (e: MouseEvent) => {
+            if (isMobile) return;
+
+            const rect = container.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) / rect.width;
+            const mouseY = (e.clientY - rect.top) / rect.height;
+
+            planets.forEach((planet, index) => {
+                const depth = 0.5 + (index % 3) * 0.2; // Artificial depth
+                const parallaxX = (mouseX - 0.5) * 30 * depth;
+                const parallaxY = (mouseY - 0.5) * 30 * depth;
+                (planet as HTMLElement).style.transform =
+                    `translate(${parallaxX}px, ${parallaxY}px)`;
+            });
+        };
+
+        if (!isMobile) {
+            window.addEventListener("mousemove", handleMouseMoveGlobal);
+        }
+
+        // Initialize icon sizes once
+        planets.forEach((planet) => {
+            const el = planet as HTMLElement;
+            const icon = el.querySelector("svg");
+            if (icon) {
+                const size = el.offsetWidth;
+                icon.style.width = `${size * 0.35}px`;
+                icon.style.height = `${size * 0.35}px`;
+            }
+        });
+    };
+
+    // Run on page load and on Astro transitions
+    initUniverse();
+    document.addEventListener("astro:page-load", initUniverse);
+
+    // Theme change detection
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === "class") {
+                initUniverse();
+            }
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    window.addEventListener("resize", () => {
+        initUniverse();
+    });
+</script>
+
+<style>
+    .tech-stack-section {
+        padding: 120px 0 60px 0;
+        background-color: var(--color-bg);
+        position: relative;
+        overflow: hidden;
+        color: var(--color-text);
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
+    }
+
+    .tech-universe-container {
+        position: relative;
+        width: 100%;
+        min-height: 80vh;
+        overflow: hidden;
+        margin-top: 20px;
+        z-index: 2;
+    }
+
+    .tech-planets-wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        height: 100%;
+        position: relative;
+    }
+
+    /* Fondo espacial */
+    .space-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    /* Nebulosa sutil */
+    .nebula-minimal {
+        position: absolute;
+        width: 1000px;
+        height: 1000px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(0, 86, 179, 0.15) 0%,
+            transparent 70%
+        );
+        filter: blur(100px);
+        pointer-events: none;
+    }
+
+    /* Tecnologías como planetas */
+    .tech-planets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 3rem 2rem;
+        width: 100%;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .tech-planet {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        cursor: pointer;
+        transition:
+            transform 0.2s ease-out,
+            scale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes float-smooth {
+        0%,
+        100% {
+            padding-top: 0;
+        }
+        50% {
+            padding-top: -20px;
+        }
+    }
+
+    .tech-planet:hover {
+        animation-play-state: paused;
+        scale: 1.25;
+        z-index: 100;
+    }
+
+    .tech-planet:hover .planet-glow {
+        opacity: 0.6;
+        transform: scale(1.6);
+    }
+
+    .tech-planet:hover .planet-name {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+
+    .tech-planet:hover .planet-content {
+        background: var(--color-accent);
+        border-color: var(--tech-color);
+        box-shadow: 0 0 25px var(--tech-color);
+    }
+
+    /* Glow del planeta */
+    .planet-glow {
+        position: absolute;
+        width: 85%;
+        height: 85%;
+        border-radius: 50%;
+        opacity: 0.15;
+        filter: blur(25px);
+        transition: all 0.5s ease;
+        pointer-events: none;
+    }
+
+    /* Contenido del planeta */
+    .planet-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--color-accent);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+        box-shadow: var(--shadow-md);
+    }
+
+    .planet-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+    }
+
+    .planet-name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--color-text);
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        bottom: -30px;
+        white-space: nowrap;
+    }
+
+    .bottom-gradient {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(to top, var(--color-bg), transparent);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* Responsive refinements */
+    @media (max-width: 768px) {
+        .tech-stack-section {
+            padding: 80px 0 40px 0;
+        }
+        .tech-universe-container {
+            min-height: auto;
+        }
+        .tech-planets {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin: 40px auto;
+            max-width: 300px;
+        }
+        .tech-planet {
+            width: 140px;
+            height: 140px;
+        }
+        .planet-name {
+            font-size: 0.9rem;
+            bottom: -35px;
+            opacity: 1;
+            display: block;
+        }
+        .section-title {
+            font-size: 2.25rem !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tech-planets {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        .tech-planet {
+            width: 120px;
+            height: 120px;
+        }
+    }
+</style>

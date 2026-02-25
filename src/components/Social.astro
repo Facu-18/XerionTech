@@ -1,0 +1,66 @@
+---
+const socials = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/xerion-tech-7512143b3/",
+    icon: "Linkedin",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/xeriontech",
+    icon: "Instagram",
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@xerionTecnologia",
+    icon: "Youtube",
+  },
+  { name: "Email", url: "mailto:xeriontech01@gmail.com", icon: "Mail" },
+];
+---
+
+<section id="social" class="social">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Conecta con nosotros.</h2>
+      <p class="section-subtitle">
+        Sigue nuestro camino y mantente al tanto de nuestros últimos proyectos.
+      </p>
+    </div>
+
+    <div class="social-links">
+      {
+        socials.map((social) => (
+          <a
+            href={social.url}
+            class="social-item"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="social-icon">
+              <i data-lucide={social.icon} />
+            </div>
+            <span class="social-name">{social.name}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { createIcons, Linkedin, Instagram, Youtube, Mail } from "lucide";
+
+  const initSocial = () => {
+    createIcons({
+      icons: { Linkedin, Instagram, Youtube, Mail },
+    });
+  };
+
+  initSocial();
+  document.addEventListener("astro:page-load", initSocial);
+</script>
+
+<style>
+  @import "../styles/Social.css";
+</style>

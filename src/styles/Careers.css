@@ -1,0 +1,120 @@
+.careers {
+    background-color: var(--color-bg);
+    padding: 120px 20px;
+    position: relative;
+    border-top: 1px solid var(--color-border);
+}
+
+.careers-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.careers-content {
+    margin-bottom: 60px;
+}
+
+.careers-content .section-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--color-text);
+}
+
+.careers-desc {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.careers-cta-box {
+    background: var(--color-white);
+    padding: 60px 40px;
+    border-radius: 32px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
+    max-width: 600px;
+    margin: 0 auto;
+    transition: var(--transition-normal);
+}
+
+:global(.dark) .careers-cta-box {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+}
+
+.cta-icon {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(0, 86, 179, 0.1);
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.cta-icon i {
+    width: 32px;
+    height: 32px;
+}
+
+.careers-cta-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.cta-email {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 16px;
+    transition: var(--transition-fast);
+}
+
+.cta-email:hover {
+    filter: brightness(1.2);
+}
+
+.cta-instruction {
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+}
+
+.careers-email-btn {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 18px 40px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.careers-email-btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 86, 179, 0.3);
+}
+
+@media (max-width: 768px) {
+    .careers-content .section-title {
+        font-size: 2.5rem;
+    }
+
+    .cta-email {
+        font-size: 1.4rem;
+    }
+
+    .careers-cta-box {
+        padding: 40px 20px;
+    }
+}

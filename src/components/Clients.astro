@@ -1,0 +1,41 @@
+---
+// Fetch all SVG icons from public/icons folder
+// Note: In Astro, public files are served at the root.
+// We just need the filenames to use them in <img> tags.
+const iconFiles = [
+  "cda.svg",
+  "ficosa.svg",
+  "galicia.svg",
+  "itlg.svg",
+  "itps_one_black.svg",
+  "playdigital.svg",
+];
+---
+
+<section id="clients" class="clients">
+  <div class="container">
+    <h2 class="carousel-title">Confían en nosotros</h2>
+
+    <div class="carousel-container">
+      <div class="carousel-track">
+        {/* Render twice for infinite loop effect */}
+        {
+          [...iconFiles, ...iconFiles].map((icon) => (
+            <div class="carousel-item">
+              <img
+                src={`/icons/${icon}`}
+                alt="Client Logo"
+                loading="lazy"
+                class={icon === "itps_one_black.svg" ? "large-logo" : ""}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @import "../styles/Clients.css";
+</style>

@@ -1,0 +1,171 @@
+---
+
+---
+
+<section id="contact" class="contact">
+  <div class="container contact-container">
+    <div class="contact-info">
+      <span class="section-tag">Contáctanos</span>
+      <h2 class="section-title">Construyamos algo grande juntos.</h2>
+      <p class="contact-desc">
+        ¿Tienes un proyecto en mente? Nos encantaría escucharlo. Ya sea que
+        busques software a medida o solo necesites asesoramiento técnico,
+        nuestro equipo está listo para ayudarte.
+      </p>
+
+      <div class="contact-details">
+        <div class="detail-item">
+          <strong>Email:</strong>
+          <a href="mailto:xeriontech01@gmail.com">xeriontech01@gmail.com</a>
+        </div>
+        <div class="detail-item">
+          <strong>Oficina:</strong>
+          <span>Remoto, con base en Argentina</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrapper">
+      <form
+        class="contact-form"
+        id="contact-form"
+        action="https://formspree.io/f/xeelvwnw"
+        method="POST"
+      >
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Tu nombre"
+            required
+            minlength="3"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="_replyto"
+            placeholder="tu@email.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Cuéntanos sobre tu proyecto..."
+            required
+            minlength="10"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn"
+          >Vamos a construir</button
+        >
+        <div id="form-status" class="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status");
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!status || !submitBtn) return;
+
+    // Basic Validation
+    const formData = new FormData(form);
+    const email = formData.get("_replyto") as string;
+    const name = formData.get("name") as string;
+    const message = formData.get("message") as string;
+
+    if (!name || name.length < 3) {
+      showStatus(
+        "Por favor, ingresa un nombre válido (mínimo 3 caracteres).",
+        "error",
+      );
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      showStatus("Por favor, ingresa un email válido.", "error");
+      return;
+    }
+
+    if (!message || message.length < 10) {
+      showStatus("El mensaje es muy corto (mínimo 10 caracteres).", "error");
+      return;
+    }
+
+    // Submit to Formspree
+    try {
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Enviando...";
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        showStatus(
+          "¡Gracias! Tu mensaje ha sido enviado con éxito. Te contactaremos a la brevedad.",
+          "success",
+        );
+        form.reset();
+      } else {
+        const data = await response.json();
+        if (Object.hasOwn(data, "errors")) {
+          showStatus(
+            data["errors"].map((error: any) => error["message"]).join(", "),
+            "error",
+          );
+        } else {
+          showStatus("Ups! Hubo un problema al enviar el formulario.", "error");
+        }
+      }
+    } catch (error) {
+      showStatus("Ups! Hubo un problema de conexión.", "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Vamos a construir";
+    }
+  });
+
+  function validateEmail(email: string) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function showStatus(message: string, type: "success" | "error") {
+    if (!status) return;
+    status.innerText = message;
+    status.className = `form-status ${type}`;
+
+    if (type === "success") {
+      setTimeout(() => {
+        status.innerText = "";
+        status.className = "form-status";
+      }, 5000);
+    }
+  }
+</script>
+
+<style>
+  @import "../styles/Contact.css";
+</style>

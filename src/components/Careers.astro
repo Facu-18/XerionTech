@@ -1,0 +1,51 @@
+---
+
+---
+
+<section id="careers" class="careers">
+    <div class="container careers-container">
+        <div class="careers-content">
+            <span class="section-tag">Únete al Equipo</span>
+            <h2 class="section-title">¿Quieres trabajar con nosotros?</h2>
+            <p class="careers-desc">
+                Buscamos talentos apasionados por la innovación y la excelencia
+                técnica. Si crees que puedes aportar valor a XerionTech, nos
+                encantaría conocerte.
+            </p>
+        </div>
+
+        <div class="careers-cta-box">
+            <div class="cta-icon">
+                <i data-lucide="mail"></i>
+            </div>
+            <h3>Envíanos tu CV a:</h3>
+            <a href="mailto:xeriontech01@gmail.com" class="cta-email"
+                >xeriontech01@gmail.com</a
+            >
+            <p class="cta-instruction">
+                Adjunta tu CV en formato PDF y cuéntanos sobre tu experiencia.
+            </p>
+
+            <a href="mailto:xeriontech01@gmail.com" class="careers-email-btn">
+                Enviar Email Ahora
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { createIcons, Mail } from "lucide";
+
+    const initCareers = () => {
+        createIcons({
+            icons: { Mail },
+        });
+    };
+
+    initCareers();
+    document.addEventListener("astro:page-load", initCareers);
+</script>
+
+<style>
+    @import "../styles/Careers.css";
+</style>

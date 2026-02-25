@@ -1,0 +1,102 @@
+.social {
+    background-color: var(--color-bg);
+    padding: 120px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.social .section-title {
+    color: var(--color-text);
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.social .section-subtitle {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.social-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    padding: 40px 30px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow-sm);
+}
+
+:global(.dark) .social-item {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+}
+
+.social-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.social-icon i {
+    width: 32px;
+    height: 32px;
+}
+
+.social-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.social-item:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 40px rgba(0, 86, 179, 0.1);
+}
+
+:global(.dark) .social-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.social-item:hover .social-icon {
+    background-color: var(--color-primary);
+    color: white;
+    transform: scale(1.1) rotate(5deg);
+}
+
+.social-item:hover .social-name {
+    color: var(--color-primary);
+}
+
+@media (max-width: 576px) {
+    .social-links {
+        gap: 24px;
+    }
+}

@@ -1,0 +1,58 @@
+---
+const founders = [
+  {
+    name: "Gaston Moriconi",
+    role: "CEO / Desarrollador",
+    bio: "Tecnólogo visionario especializado en arquitectura de software empresarial y estrategias de integración de IA. Liderando la dirección técnica de XerionTech.",
+    stack: ["Microservices", "SOA", "AWS", "Angular", "Java", "OpenAPI"],
+    avatar: "/images/gaston.png",
+  },
+  {
+    name: "Facundo Moriconi",
+    role: "Co-CEO / Desarrollador",
+    bio: "Ingeniero de software experto enfocado en aplicaciones web de alto rendimiento y experiencias de usuario fluidas. Impulsando el crecimiento mediante la excelencia técnica.",
+    stack: ["Node.js", "TypeScript", "React", "NextJS", "PostreSQL"],
+    avatar: "/images/facundo.png",
+  },
+];
+---
+
+<section id="founders" class="founders">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Liderazgo</span>
+      <h2 class="section-title">Las mentes detrás del código.</h2>
+      <p class="section-subtitle">
+        Una pasión combinada por construir el futuro de la tecnología.
+      </p>
+    </div>
+
+    <div class="founders-grid">
+      {
+        founders.map((founder) => (
+          <div class="founder-card">
+            <div class="founder-header">
+              <div class="founder-avatar">
+                <img src={founder.avatar} alt={founder.name} />
+              </div>
+              <div>
+                <h3 class="founder-name">{founder.name}</h3>
+                <p class="founder-role">{founder.role}</p>
+              </div>
+            </div>
+            <p class="founder-bio">{founder.bio}</p>
+            <div class="founder-stack">
+              {founder.stack.map((skill) => (
+                <span class="skill-badge">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @import "../styles/Founders.css";
+</style>
