@@ -61,6 +61,78 @@
     gap: 8px;
 }
 
+.phone-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.custom-select {
+    position: relative;
+    width: 110px;
+    font-size: 0.9rem;
+}
+
+.select-selected {
+    background-color: var(--color-form-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+}
+
+.select-selected img {
+    width: 20px;
+    height: auto;
+}
+
+.select-active {
+    border-color: var(--color-primary);
+}
+
+.select-items {
+    position: absolute;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    z-index: 99;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.select-items div {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition-fast);
+}
+
+.select-items div:hover {
+    background-color: var(--color-accent);
+}
+
+.select-items img {
+    width: 20px;
+    height: auto;
+}
+
+.select-hide {
+    display: none;
+}
+
+#phone {
+    flex: 1;
+}
+
 .form-group label {
     font-weight: 600;
     font-size: 0.9rem;
